@@ -5,14 +5,33 @@ jobs:
     build:
         runs-on: ubuntu-18.04
         steps:
-        - name: Install mender artifact
+        - name: Install mender-artifact
           run: |
             wget https://d1b0l86ne08fsf.cloudfront.net/mender-artifact/3.3.0/linux/mender-artifact
             sudo mv mender-artifact /usr/local/bin/
             sudo chmod +x /usr/local/bin/mender-artifact
+
         - name: Download update modules
           run: |
             sudo mkdir -p /usr/share/mender/modules/v3
             sudo wget -P /usr/share/mender/modules/v3 https://raw.githubusercontent.com/mendersoftware/mender/master/support/modules/script
-            sudo ls /usr/share/mender/modules/v3
-            mender-artifact
+
+        - uses: actions/checkout@v1
+
+        - name: Add Umbrel update module 
+          run: |
+            sudo mv update-scripts/umbrel /usr/share/mender/modules/v3/
+            sudo chmod +x /usr/share/mender/modules/v3/umbrel
+
+        - name: Create mender artifact
+          run: |
+            ARTIFACT_NAME="umbrel-compose-v0.1.1"
+            DEVICE_TYPE="raspberrypi4"
+            OUTPUT_PATH="umbrel-compose-v0.1.1.mender"
+            mender-artifact write module-image -T umbrel -n ${ARTIFACT_NAME} -t ${DEVICE_TYPE} -o ${OUTPUT_PATH} -f update-scripts
+
+        - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: umbrel-compose-v0.1.1.mender
+            path: umbrel-compose-v0.1.1.mender
