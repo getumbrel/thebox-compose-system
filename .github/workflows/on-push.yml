@@ -27,7 +27,7 @@ jobs:
           run: |
             ARTIFACT_NAME="umbrel-compose-v0.1.1"
             DEVICE_TYPE="raspberrypi4"
-            OUTPUT_PATH="umbrel-compose-v0.1.1.mender"
+            OUTPUT_PATH="umbrel-compose-v0.1.1.zip"
             mender-artifact write module-image \
             -T umbrel \
             -n ${ARTIFACT_NAME} \
