@@ -1,10 +1,16 @@
 name: Create mender artifact
 on:
-    push
+    push:
+        tags:
+          - v[0-9]+.[0-9]+.[0-9]+
+          - v[0-9]+.[0-9]+.[0-9]+-*
 jobs:
     build:
         runs-on: ubuntu-18.04
         steps:
+        - name: Setup TAG
+          run: echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
+          
         - name: Install mender-artifact
           run: |
             wget https://d1b0l86ne08fsf.cloudfront.net/mender-artifact/3.3.0/linux/mender-artifact
@@ -25,9 +31,9 @@ jobs:
 
         - name: Create mender artifact
           run: |
-            ARTIFACT_NAME="umbrel-compose-v0.1.1"
+            ARTIFACT_NAME="umbrel-compose-$TAG"
             DEVICE_TYPE="raspberrypi4"
-            OUTPUT_PATH="umbrel-compose-v0.1.1.mender"
+            OUTPUT_PATH="umbrel-compose-$TAG.mender"
             mender-artifact write module-image \
             -T umbrel \
             -n ${ARTIFACT_NAME} \
@@ -40,7 +46,11 @@ jobs:
             -f update-scripts/on-success.sh \
             -f update-scripts/on-error.sh 
 
-        - name: Upload artifact
-          uses: actions/upload-artifact@v2
+        - name: Release artifact
+          uses: meeDamian/github-release@v1.0.0
+          if: startsWith(github.ref, 'refs/tags/')
           with:
-            path: umbrel-compose-v0.1.1.mender
+            gzip: false
+            files: "*.mender"
+            token: ${{ secrets.GITHUB_TOKEN }}
+          allow_override: true
