@@ -1,0 +1,18 @@
+name: Create mender artifact
+on:
+    push
+jobs:
+    build:
+        runs-on: ubuntu-18.04
+        steps:
+        - name: Install mender artifact
+          run: |
+            wget https://d1b0l86ne08fsf.cloudfront.net/mender-artifact/3.3.0/linux/mender-artifact
+            mv mender-artifact /usr/local/bin/
+            chmod +x /usr/local/bin/mender-artifact
+        - name: Download update modules
+          run: |
+            mkdir -p /usr/share/mender/modules/v3
+            wget -P /usr/share/mender/modules/v3 https://raw.githubusercontent.com/mendersoftware/mender/master/support/modules/script
+            ls /usr/share/mender/modules/v3
+            mender-artifact
