@@ -28,8 +28,17 @@ jobs:
             ARTIFACT_NAME="umbrel-compose-v0.1.1"
             DEVICE_TYPE="raspberrypi4"
             OUTPUT_PATH="umbrel-compose-v0.1.1.mender"
-            touch directory-file && echo "update-scripts" > directory-file
-            mender-artifact write module-image -T umbrel -n ${ARTIFACT_NAME} -t ${DEVICE_TYPE} -o ${OUTPUT_PATH} -f directory-file
+            mender-artifact write module-image \
+            -T umbrel \
+            -n ${ARTIFACT_NAME} \
+            -t ${DEVICE_TYPE} \
+            -o ${OUTPUT_PATH} \
+            -f update-scripts/pre-install.sh \
+            -f update-scripts/checks.sh \
+            -f update-scripts/post-install.sh \
+            -f update-scripts/checks.sh \
+            -f update-scripts/on-success.sh \
+            -f update-scripts/on-error.sh 
 
         - name: Upload artifact
           uses: actions/upload-artifact@v2
