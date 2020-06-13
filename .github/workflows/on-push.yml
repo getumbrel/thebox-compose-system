@@ -10,7 +10,7 @@ jobs:
         steps:
         - name: Setup TAG
           run: echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
-          
+
         - name: Install mender-artifact
           run: |
             wget https://d1b0l86ne08fsf.cloudfront.net/mender-artifact/3.3.0/linux/mender-artifact
@@ -53,4 +53,4 @@ jobs:
             gzip: false
             files: "*.mender"
             token: ${{ secrets.GITHUB_TOKEN }}
-          allow_override: true
+            allow_override: true
