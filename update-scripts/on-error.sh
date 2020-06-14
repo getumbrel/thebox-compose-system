@@ -1,15 +1,15 @@
 #!/bin/bash -e
 
-echo "This script runs on error"
+echo "==== OTA UPDATE ===== | STAGE: ERROR"
 
 # Stop any running containers
-# docker-compose --file /home/umbrel/docker-compose.yml down
+echo "Stopping all running containers"
+docker-compose --file /home/umbrel/docker-compose.yml down
 
-# Revert to previous home dir tree + delete anything that wasn't a part of prev tree
-# rsync -av /tmp/prev_dir_tree/ /home/umbrel/ --delete
+# Revert to previous home dir tree (if exists) + delete anything that wasn't a part of prev tree
+echo "Reverting to previous /home/umbrel/ directory tree"
+[ -d /tmp/prev-dir-tree ] && rsync -av /tmp/prev_dir_tree/ /home/umbrel/ --delete
 
 # Start updated services
-# docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans
-
-# Delete all unused images
-# docker image prune --all --force
+echo "Starting previous containers"
+docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans
