@@ -31,9 +31,9 @@ jobs:
 
         - name: Create mender artifact
           run: |
-            ARTIFACT_NAME="umbrel-compose-$TAG"
+            ARTIFACT_NAME="umbrel-$TAG"
             DEVICE_TYPE="raspberrypi4"
-            OUTPUT_PATH="umbrel-compose-$TAG.mender"
+            OUTPUT_PATH="umbrel-$TAG.mender"
             mender-artifact write module-image \
             -T umbrel \
             -n ${ARTIFACT_NAME} \
@@ -46,6 +46,14 @@ jobs:
             -f update-scripts/on-error.sh \
             -f update-scripts/cleanup.sh 
             mender-artifact read $OUTPUT_PATH
+        
+        - name: Upload mender artifact to server
+          run: |
+            wget https://d1b0l86ne08fsf.cloudfront.net/mender-cli/1.3.0/linux/mender-cli
+            sudo mv mender-cli /usr/local/bin/
+            sudo chmod +x /usr/local/bin/mender-cli
+            mender-cli login --server https://54.159.58.48 --username mender-demo@example.com --password {{ secrets.MENDER_SERVER_PASSWORD }}
+            mender-cli artifacts --server https://54.159.58.48 upload umbrel-$TAG.mender
 
         - name: Release artifact
           uses: meeDamian/github-release@v1.0.0
