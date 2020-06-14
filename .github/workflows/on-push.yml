@@ -42,9 +42,9 @@ jobs:
             -f update-scripts/pre-install.sh \
             -f update-scripts/install.sh \
             -f update-scripts/post-install.sh \
-            -f update-scripts/checks.sh \
             -f update-scripts/on-success.sh \
             -f update-scripts/on-error.sh 
+            mender-artifact read $OUTPUT_PATH
 
         - name: Release artifact
           uses: meeDamian/github-release@v1.0.0
