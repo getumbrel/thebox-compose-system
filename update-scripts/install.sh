@@ -16,7 +16,7 @@ git fetch --all --tags
 git checkout tags/$RELEASE
 
 echo "Removing unwanted stuff"
-Remove unwanted stuff
+# Remove unwanted stuff
 rm -rf .git
 rm -f README.md
 rm -f LICENSE
