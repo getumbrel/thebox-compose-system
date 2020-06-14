@@ -46,6 +46,10 @@ echo "Updating RPC Password in docker-compose.yml"
 RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
 sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/docker-compose.yml
 
+# Fix permissions
+echo "Fixing permissions"
+chown -R umbrel:umbrel /home/umbrel
+
 # Start updated containers
 echo "Starting new containers"
 docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans

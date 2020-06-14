@@ -10,6 +10,10 @@ docker-compose --file /home/umbrel/docker-compose.yml down
 echo "Reverting to previous /home/umbrel/ directory tree"
 [ -d /tmp/prev-dir-tree ] && rsync -av /tmp/prev-dir-tree/ /home/umbrel/ --delete
 
+# Fix permissions
+echo "Fixing permissions"
+chown -R umbrel:umbrel /home/umbrel
+
 # Start updated services
 echo "Starting previous containers"
 docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans
