@@ -31,11 +31,11 @@ rm -rf secrets
 
 # Pull new images
 echo "Pulling new images"
-docker-compose --file /tmp/new-dir-tree/docker-compose.yml pull
+HOME=/home/umbrel docker-compose --file /tmp/new-dir-tree/docker-compose.yml pull
 
 # Stop existing containers
 echo "Stopping existing containers"
-docker-compose --file /home/umbrel/docker-compose.yml down
+HOME=/home/umbrel docker-compose --file /home/umbrel/docker-compose.yml down
 
 # Overlay home dir structure with new dir tree
 echo "Overlaying /home/umbrel/ with new directory tree"
@@ -52,4 +52,4 @@ chown -R umbrel:umbrel /home/umbrel
 
 # Start updated containers
 echo "Starting new containers"
-docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans
+HOME=/home/umbrel docker-compose --file /home/umbrel/docker-compose.yml up --detach --remove-orphans
