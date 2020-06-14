@@ -23,33 +23,33 @@ case "$STATE" in
     ;;
 
     ArtifactInstall_Enter)
-        chmod u+x $pre_install_script
-        $pre_install_script
+        chmod u+x "$pre_install_script"
+        "$pre_install_script"
     ;;
 
     ArtifactInstall)
-        chmod u+x $install_script
-        $install_script
+        chmod u+x "$install_script"
+        "$install_script"
     ;;
 
     ArtifactInstall_Leave)
-        chmod u+x $post_install_script
-        $post_install_script
+        chmod u+x "$post_install_script"
+        "$post_install_script"
     ;;
 
     ArtifactCommit_Enter)
-        chmod u+x $checks_script
-        $checks_script
+        chmod u+x "$checks_script"
+        "$checks_script"
     ;;
 
     ArtifactCommit)
-        chmod u+x $success_script
-        $success_script
+        chmod u+x "$success_script"
+        "$success_script"
     ;;
 
     ArtifactRollback)
-        chmod u+x $error_script
-        $error_script
+        chmod u+x "$error_script"
+        "$error_script"
     ;;
 
 esac

@@ -2,4 +2,4 @@
 
 echo "This script installs the update"
 
-touch /home/$USER/statuses/update-successful
+touch /home/umbrel/statuses/update-successful
