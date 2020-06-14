@@ -40,7 +40,7 @@ jobs:
             -t ${DEVICE_TYPE} \
             -o ${OUTPUT_PATH} \
             -f update-scripts/pre-install.sh \
-            -f update-scripts/checks.sh \
+            -f update-scripts/install.sh \
             -f update-scripts/post-install.sh \
             -f update-scripts/checks.sh \
             -f update-scripts/on-success.sh \
