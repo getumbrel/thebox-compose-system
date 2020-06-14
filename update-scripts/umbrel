@@ -8,9 +8,9 @@ FILES="$2"
 pre_install_script="$FILES"/files/pre-install.sh
 install_script="$FILES"/files/install.sh
 post_install_script="$FILES"/files/post-install.sh
-checks_script="$FILES"/files/checks.sh
 error_script="$FILES"/files/on-error.sh
 success_script="$FILES"/files/on-success.sh
+cleanup_script="$FILES"/files/cleanup.sh
 
 case "$STATE" in
 
@@ -22,24 +22,15 @@ case "$STATE" in
         echo "Yes"
     ;;
 
-    ArtifactInstall_Enter)
+    ArtifactInstall)
         chmod u+x "$pre_install_script"
         "$pre_install_script"
-    ;;
 
-    ArtifactInstall)
         chmod u+x "$install_script"
         "$install_script"
-    ;;
 
-    ArtifactInstall_Leave)
         chmod u+x "$post_install_script"
         "$post_install_script"
-    ;;
-
-    ArtifactCommit_Enter)
-        chmod u+x "$checks_script"
-        "$checks_script"
     ;;
 
     ArtifactCommit)
@@ -50,6 +41,11 @@ case "$STATE" in
     ArtifactRollback)
         chmod u+x "$error_script"
         "$error_script"
+    ;;
+
+    Cleanup)
+        chmod u+x "$cleanup_script"
+        "$cleanup_script"
     ;;
 
 esac
