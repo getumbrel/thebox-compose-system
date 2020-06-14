@@ -34,6 +34,10 @@ docker-compose --file /home/$USER/docker-compose.yml down
 # Overlay home dir structure with new dir structure
 rsync -av /tmp/new-dir-tree/ --exclude='.*' /home/$USER/
 
+# Update RPC Password in docker-compose.yml
+RPCPASS=`cat /home/$USER/secrets/rpcpass.txt`
+sed -i "s/RPCPASS/${RPCPASS}/g;" /home/$USER/docker-compose.yml
+
 # Start updated containers
 docker-compose --file /home/$USER/docker-compose.yml up --detach --remove-orphans
 

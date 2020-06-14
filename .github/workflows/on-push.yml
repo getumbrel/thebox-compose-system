@@ -35,16 +35,11 @@ jobs:
             DEVICE_TYPE="raspberrypi4"
             OUTPUT_PATH="umbrel-compose-$TAG.mender"
             mender-artifact write module-image \
-            -T umbrel \
+            -T script \
             -n ${ARTIFACT_NAME} \
             -t ${DEVICE_TYPE} \
             -o ${OUTPUT_PATH} \
-            -f update-scripts/pre-install.sh \
-            -f update-scripts/checks.sh \
-            -f update-scripts/post-install.sh \
-            -f update-scripts/checks.sh \
-            -f update-scripts/on-success.sh \
-            -f update-scripts/on-error.sh 
+            -f update-scripts/test-update.sh
 
         - name: Release artifact
           uses: meeDamian/github-release@v1.0.0
