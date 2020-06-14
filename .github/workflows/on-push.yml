@@ -52,7 +52,7 @@ jobs:
             wget https://d1b0l86ne08fsf.cloudfront.net/mender-cli/1.3.0/linux/mender-cli
             sudo mv mender-cli /usr/local/bin/
             sudo chmod +x /usr/local/bin/mender-cli
-            mender-cli login --server https://54.159.58.48 --username mender-demo@example.com --password {{ secrets.MENDER_SERVER_PASSWORD }}
+            mender-cli login --server https://54.159.58.48 --username mender-demo@example.com --password {{ secrets.MENDER_SERVER_PASSWORD }} --skip-verify
             mender-cli artifacts --server https://54.159.58.48 upload umbrel-$TAG.mender
 
         - name: Release artifact
