@@ -63,7 +63,7 @@ services:
                     JWT_PUBLIC_KEY_FILE: "/db/jwt-public-key/jwt.pem"
                     JWT_PRIVATE_KEY_FILE: "/db/jwt-private-key/jwt.key"
                     JWT_EXPIRATION: "3600"
-                    DOCKER_COMPOSE_DIRECTORY: $HOME
+                    DOCKER_COMPOSE_DIRECTORY: $PWD
                     DEVICE_HOST: "http://umbrel.local"
         middleware:
                 image: getumbrel/middleware:v0.1.1
