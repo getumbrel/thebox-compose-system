@@ -46,6 +46,9 @@ services:
                 restart: always
                 network_mode: host
                 stop_grace_period: 1m30s
+                environment:
+                    VUE_APP_MANAGER_API_URL: "/manager-api"
+                    VUE_APP_MIDDLEWARE_API_URL: "/api"
         manager:
                 image: getumbrel/manager:v0.1.1
                 logging: *default-logging
