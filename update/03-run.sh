@@ -12,4 +12,4 @@ echo "Deleting previous images"
 
 # Cleanup
 echo "Deleting backup"
-# [ -d /tmp/umbrel-backup ] && rm -rf /tmp/umbrel-backup
+[ -d /tmp/umbrel-backup ] && rm -rf /tmp/umbrel-backup

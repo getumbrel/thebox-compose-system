@@ -35,16 +35,16 @@ docker-compose --file /tmp/umbrel-$RELEASE/docker-compose.yml pull
 
 # Stop existing containers
 echo "Stopping existing containers"
-# docker-compose --file $UMBREL_DIR/docker-compose.yml down
+docker-compose --file $UMBREL_DIR/docker-compose.yml down
 
 # Overlay home dir structure with new dir tree
 echo "Overlaying $UMBREL_DIR/ with new directory tree"
-# rsync -av /tmp/umbrel-$RELEASE/ --exclude='.*' $UMBREL_DIR/
+rsync -av /tmp/umbrel-$RELEASE/ --exclude='.*' $UMBREL_DIR/
 
 # Fix permissions
 echo "Fixing permissions"
-# chown -R $USER:$USER $UMBREL_DIR
+chown -R $USER:$USER $UMBREL_DIR
 
 # Start updated containers
 echo "Starting new containers"
-# docker-compose --file $UMBREL_DIR/docker-compose.yml up --detach --remove-orphans
+docker-compose --file $UMBREL_DIR/docker-compose.yml up --detach --remove-orphans

@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-RELEASE="ota-update"
+RELEASE="feature-ota"
 UMBREL_DIR=$(dirname $(readlink -f $0))
 
 echo "==== OTA UPDATE ===== | STAGE: DOWNLOAD"
@@ -10,7 +10,7 @@ echo "Cleaning up any previous mess"
 [ -d /tmp/umbrel-$RELEASE ] && rm -rf /tmp/umbrel-$RELEASE
 
 # Clone new dir tree
-echo "Cloning repository"
+echo "Download Umbrel $RELEASE"
 git clone -b $RELEASE https://github.com/mayankchhabra/umbrel-compose.git /tmp/umbrel-$RELEASE
 
 cd /tmp/umbrel-$RELEASE/update

@@ -4,7 +4,7 @@
 RELEASE=$1
 UMBREL_DIR=$2
 
-echo "==== OTA UPDATE ===== | STAGE: PRE-UPDATE $1 // $2"
+echo "==== OTA UPDATE ===== | STAGE: PRE-UPDATE | Installing Umbrel $1 at $2"
 
 # Cleanup just in case there's temp stuff lying around from previous update
 echo "Cleaning up any previous backup"
