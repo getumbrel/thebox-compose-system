@@ -64,7 +64,7 @@ services:
                     net:
                         ipv4_address: 10.11.1.2
         dashboard:
-                image: getumbrel/dashboard:v0.2.1
+                image: mayankchhabra/dashboard:ota
                 depends_on: [ bitcoin, lnd, nginx ]
                 logging: *default-logging
                 restart: always
@@ -73,7 +73,7 @@ services:
                     net:
                         ipv4_address: 10.11.0.3
         manager:
-                image: getumbrel/manager:v0.1.1
+                image: mayankchhabra/manager:feature-ota
                 depends_on: [ bitcoin, lnd, nginx ]
                 logging: *default-logging
                 restart: unless-stopped
@@ -83,6 +83,7 @@ services:
                         - /var/run/docker.sock:/var/run/docker.sock
                         - /usr/bin/docker:/usr/bin/docker
                         - ${PWD}:${PWD}
+                        - ${PWD}/update:/update
                 environment:
                     PORT: "3006"
                     USER_PASSWORD_FILE: "/db/user.json"
@@ -92,6 +93,10 @@ services:
                     DOCKER_COMPOSE_DIRECTORY: $PWD
                     DEVICE_HOST: "http://umbrel.local"
                     MIDDLEWARE_API_URL: "http://10.11.2.2"
+                    UPDATE_URL: "https://raw.githubusercontent.com/mayankchhabra/umbrel-compose/feature-ota/update/version.json"
+                    UPDATE_VERSION_FILE: "update/version.json"
+                    UPDATE_STATUS_FILE: "update/status.json"
+                    UPDATE_SIGNAL_FILE: "update/START"
                 networks:
                     net:
                         ipv4_address: 10.11.2.1

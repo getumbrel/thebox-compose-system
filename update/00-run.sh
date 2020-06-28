@@ -5,8 +5,8 @@ RELEASE=$1
 UMBREL_DIR=$2
 
 echo "==== OTA UPDATE ===== | STAGE: PRE-UPDATE | Installing Umbrel $1 at $2"
-# Backup existing dir tree
-cat <<EOF > $UMBREL_DIR/status.json
+
+cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installing", "progress": 20, "description": "Backing up existing data"}
 EOF
 
