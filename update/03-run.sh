@@ -20,6 +20,9 @@ cat <<EOF > $UMBREL_DIR/update/status.json
 EOF
 [ -d /tmp/umbrel-backup ] && rm -rf /tmp/umbrel-backup
 
+echo "Removing update signal file"
+rm -f $UMBREL_DIR/update/START
+
 echo "Successfully installed Umbrel $RELEASE"
 cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installed", "progress": 100, "description": "Successfully installed Umbrel $RELEASE"}
