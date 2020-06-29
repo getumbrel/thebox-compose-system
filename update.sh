@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-RELEASE="feature-ota"
 UMBREL_DIR=$(dirname $(readlink -f $0))
+RELEASE=$(cat $UMBREL_DIR/update/START)
 
 echo "==== OTA UPDATE ===== | STAGE: DOWNLOAD"
 
