@@ -32,6 +32,9 @@ echo "Updating RPC Password in docker-compose.yml"
 RPCPASS=`cat $UMBREL_DIR/secrets/rpcpass.txt`
 sed -i "s/RPCPASS/${RPCPASS}/g;" docker-compose.yml
 
+echo "Setting regtest port"
+sed -i "s/RPCPORT/18443/g;" docker-compose.yml
+
 # Pull new images
 echo "Pulling new images"
 cat <<EOF > $UMBREL_DIR/update/status.json
