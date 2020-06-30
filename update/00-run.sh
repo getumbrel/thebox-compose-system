@@ -14,6 +14,10 @@ EOF
 echo "Cleaning up any previous backup"
 [ -d /tmp/umbrel-backup ] && rm -rf /tmp/umbrel-backup
 
+#Fix permissions
+echo "Fixing permissions"
+chown -R $USER:$USER $UMBREL_DIR
+
 echo "Backing up existing directory tree"
 rsync -av $UMBREL_DIR/ \
     --exclude='.*' \

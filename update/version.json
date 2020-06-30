@@ -1,5 +1,5 @@
 {
-    "version": "0.1.1-ota.3",
-    "name": "Umbrel v0.1.1 - OTA 3",
+    "version": "0.1.1-alpha.4",
+    "name": "Umbrel v0.1.1 Alpha",
     "notes": "This version introduces a number of bug fixes and increases the performance of your Umbrel."
 }
