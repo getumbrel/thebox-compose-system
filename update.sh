@@ -2,6 +2,7 @@
 
 UMBREL_DIR=$(dirname $(readlink -f $0))
 RELEASE=$(cat $UMBREL_DIR/update/START)
+UMBREL_USER=$(logname)
 
 echo "==== OTA UPDATE ===== | STAGE: DOWNLOAD"
 
@@ -23,7 +24,7 @@ echo "Running update install scripts"
 for i in {00..99}; do
     if [ -x ${i}-run.sh ]; then
         echo "Begin ${i}-run.sh"
-        ./${i}-run.sh $RELEASE $UMBREL_DIR
+        ./${i}-run.sh $RELEASE $UMBREL_DIR $UMBREL_USER
         echo "End ${i}-run.sh"
     fi
 done

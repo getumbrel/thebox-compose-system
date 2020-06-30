@@ -3,6 +3,7 @@
 
 RELEASE=$1
 UMBREL_DIR=$2
+UMBREL_USER=$3
 
 echo "==== OTA UPDATE ===== | STAGE: INSTALL UPDATE"
 cat <<EOF > $UMBREL_DIR/update/status.json
@@ -54,8 +55,8 @@ echo "Overlaying $UMBREL_DIR/ with new directory tree"
 rsync -av /tmp/umbrel-$RELEASE/ --exclude='.*' $UMBREL_DIR/
 
 #Fix permissions
-echo "Fixing permissions - $USER"
-chown -R $USER:$USER $UMBREL_DIR/
+echo "Fixing permissions"
+chown -R $UMBREL_USER:$UMBREL_USER $UMBREL_DIR/
 
 # Start updated containers
 echo "Starting new containers"
