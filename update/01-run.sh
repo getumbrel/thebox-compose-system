@@ -53,9 +53,9 @@ docker-compose --file $UMBREL_DIR/docker-compose.yml down
 echo "Overlaying $UMBREL_DIR/ with new directory tree"
 rsync -av /tmp/umbrel-$RELEASE/ --exclude='.*' $UMBREL_DIR/
 
-# Fix permissions
-# echo "Fixing permissions"
-# chown -R $USER:$USER $UMBREL_DIR
+#Fix permissions
+echo "Fixing permissions"
+chown -R $USER:$USER $UMBREL_DIR
 
 # Start updated containers
 echo "Starting new containers"
