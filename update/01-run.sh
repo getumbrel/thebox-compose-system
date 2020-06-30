@@ -33,7 +33,8 @@ echo "Updating RPC Password in docker-compose.yml"
 RPCPASS=`cat $UMBREL_DIR/secrets/rpcpass.txt`
 sed -i "s/RPCPASS/${RPCPASS}/g;" docker-compose.yml
 
-echo "Setting regtest port"
+echo "Setting regtest"
+sed -i 's/mainnet/regtest/g; ' docker-compose.yml
 sed -i "s/RPCPORT/18443/g;" docker-compose.yml
 
 # Pull new images
@@ -63,4 +64,5 @@ echo "Starting new containers"
 cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installing", "progress": 80, "description": "Starting new containers"}
 EOF
+cd $UMBREL_DIR
 su - $UMBREL_USER -c "docker-compose --file $UMBREL_DIR/docker-compose.yml up --detach --remove-orphans"
