@@ -26,5 +26,5 @@ rm -f $UMBREL_DIR/update/START
 
 echo "Successfully installed Umbrel $RELEASE"
 cat <<EOF > $UMBREL_DIR/update/status.json
-{"state": "installed", "progress": 100, "description": "Successfully installed Umbrel $RELEASE"}
+{"state": "success", "progress": 100, "description": "Successfully installed Umbrel $RELEASE"}
 EOF
