@@ -54,12 +54,7 @@ su - $UMBREL_USER -c "cd $UMBREL_DIR; docker-compose --file $UMBREL_DIR/docker-c
 # Overlay home dir structure with new dir tree
 echo "Overlaying $UMBREL_DIR/ with new directory tree"
 rsync -av /tmp/umbrel-$RELEASE/ \
-    --exclude='.*' 
-    # --exclude='bitcoin' \
-    # --exclude='lnd' \
-    # --exclude='db' \
-    # --exclude='secrets' \
-    # --exclude='tor' \
+    --exclude='.*' \
     $UMBREL_DIR/
     
 #Fix permissions

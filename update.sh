@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 UMBREL_DIR=$(dirname $(readlink -f $0))
-RELEASE=$(cat $UMBREL_DIR/update/START)
+RELEASE="v$(cat $UMBREL_DIR/update/START)"
 UMBREL_USER=$(logname)
 
 echo "==== OTA UPDATE ===== | STAGE: DOWNLOAD"
