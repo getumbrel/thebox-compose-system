@@ -83,6 +83,7 @@ services:
                         - /var/run/docker.sock:/var/run/docker.sock
                         - /usr/bin/docker:/usr/bin/docker
                         - ${PWD}:${PWD}
+                        - ${PWD}/tor/data:/var/lib/tor
                         - ${PWD}/update:/update
                 environment:
                     PORT: "3006"
@@ -93,10 +94,11 @@ services:
                     DOCKER_COMPOSE_DIRECTORY: $PWD
                     DEVICE_HOST: "http://umbrel.local"
                     MIDDLEWARE_API_URL: "http://10.11.2.2"
+                    UMBREL_DASHBOARD_HIDDEN_SERVICE_FILE: "/var/lib/tor/dashboard/hostname"
                     UPDATE_URL: "https://raw.githubusercontent.com/mayankchhabra/umbrel-compose/feature-ota/update/version.json"
-                    UPDATE_VERSION_FILE: "update/version.json"
-                    UPDATE_STATUS_FILE: "update/status.json"
-                    UPDATE_SIGNAL_FILE: "update/START"
+                    UPDATE_VERSION_FILE: "/update/version.json"
+                    UPDATE_STATUS_FILE: "/update/status.json"
+                    UPDATE_SIGNAL_FILE: "/update/START"
                 networks:
                     net:
                         ipv4_address: 10.11.2.1
