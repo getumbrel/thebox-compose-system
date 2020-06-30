@@ -49,12 +49,19 @@ echo "Stopping existing containers"
 cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installing", "progress": 70, "description": "Stopping existing containers"}
 EOF
-su - $UMBREL_USER -c "docker-compose --file $UMBREL_DIR/docker-compose.yml down"
+su - $UMBREL_USER -c "cd $UMBREL_DIR; docker-compose --file $UMBREL_DIR/docker-compose.yml down"
 
 # Overlay home dir structure with new dir tree
 echo "Overlaying $UMBREL_DIR/ with new directory tree"
-rsync -av /tmp/umbrel-$RELEASE/ --exclude='.*' $UMBREL_DIR/
-
+rsync -av /tmp/umbrel-$RELEASE/ \
+    --exclude='.*' 
+    # --exclude='bitcoin' \
+    # --exclude='lnd' \
+    # --exclude='db' \
+    # --exclude='secrets' \
+    # --exclude='tor' \
+    $UMBREL_DIR/
+    
 #Fix permissions
 echo "Fixing permissions"
 chown -R $UMBREL_USER:$UMBREL_USER $UMBREL_DIR/
@@ -65,4 +72,4 @@ cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installing", "progress": 80, "description": "Starting new containers"}
 EOF
 cd $UMBREL_DIR
-su - $UMBREL_USER -c "docker-compose --file $UMBREL_DIR/docker-compose.yml up --detach --remove-orphans"
+su - $UMBREL_USER -c "cd $UMBREL_DIR; docker-compose --file $UMBREL_DIR/docker-compose.yml up --detach --remove-orphans"
