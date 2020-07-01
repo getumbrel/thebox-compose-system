@@ -13,10 +13,13 @@
 
 echo "Cloning to current working directory from github..."
 git init
-git remote add origin https://github.com/getumbrel/umbrel-compose.git
+# git remote add origin https://github.com/getumbrel/umbrel-compose.git
+git remote add origin https://github.com/mayankchhabra/umbrel-compose.git
 git fetch
-git reset origin/master
-git checkout -t origin/master
+# git reset origin/master
+# git checkout -t origin/master
+git reset origin/feature-ota
+git checkout -t origin/feature-ota
 git reset --hard
 
 echo "Removing stuff we don't need"
