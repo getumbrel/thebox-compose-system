@@ -2,9 +2,19 @@
 
 UMBREL_DIR=$(dirname $(readlink -f $0))
 RELEASE="v$(cat $UMBREL_DIR/update/START)"
-UMBREL_USER=$(logname)
+UMBREL_USER=umbrel
 
 echo "==== OTA UPDATE ===== | STAGE: DOWNLOAD"
+
+if [ -z $(grep '[^[:space:]]' $UMBREL_DIR/update/START) ] ;then
+    echo "Empty START file. Version not found"
+    exit 1
+fi
+
+[ -f "$UMBREL_DIR/update/LOCK" ] && exit 2;
+
+echo "Creating lock"
+touch $UMBREL_DIR/update/LOCK
 
 cat <<EOF > $UMBREL_DIR/update/status.json
 {"state": "installing", "progress": 10, "description": "Downloading Umbrel $RELEASE"}
@@ -31,3 +41,8 @@ done
 
 echo "Deleting cloned repository"
 [ -d /tmp/umbrel-$RELEASE ] && rm -rf /tmp/umbrel-$RELEASE
+
+echo "Removing lock"
+rm -f $UMBREL_DIR/update/LOCK
+
+exit 0

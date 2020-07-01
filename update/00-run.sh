@@ -7,7 +7,7 @@ UMBREL_DIR=$2
 echo "==== OTA UPDATE ===== | STAGE: PRE-UPDATE | Installing Umbrel $1 at $2"
 
 cat <<EOF > $UMBREL_DIR/update/status.json
-{"state": "installing", "progress": 20, "description": "Backing up existing data"}
+{"state": "installing", "progress": 20, "description": "Backing up"}
 EOF
 
 # Cleanup just in case there's temp stuff lying around from previous update

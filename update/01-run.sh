@@ -7,7 +7,7 @@ UMBREL_USER=$3
 
 echo "==== OTA UPDATE ===== | STAGE: INSTALL UPDATE"
 cat <<EOF > $UMBREL_DIR/update/status.json
-{"state": "installing", "progress": 33, "description": "Configuring files"}
+{"state": "installing", "progress": 33, "description": "Configuring settings"}
 EOF
 
 # Checkout to the new release
@@ -40,14 +40,14 @@ sed -i "s/RPCPORT/18443/g;" docker-compose.yml
 # Pull new images
 echo "Pulling new images"
 cat <<EOF > $UMBREL_DIR/update/status.json
-{"state": "installing", "progress": 40, "description": "Pulling new Docker images"}
+{"state": "installing", "progress": 40, "description": "Downloading new Docker images"}
 EOF
 docker-compose --file /tmp/umbrel-$RELEASE/docker-compose.yml pull
 
 # Stop existing containers
 echo "Stopping existing containers"
 cat <<EOF > $UMBREL_DIR/update/status.json
-{"state": "installing", "progress": 70, "description": "Stopping existing containers"}
+{"state": "installing", "progress": 70, "description": "Removing old containers"}
 EOF
 su - $UMBREL_USER -c "cd $UMBREL_DIR; docker-compose --file $UMBREL_DIR/docker-compose.yml down"
 
