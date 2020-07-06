@@ -66,6 +66,18 @@ services:
                 networks:
                     net:
                         ipv4_address: 10.11.1.2
+        neutrino-switcher:
+                image: "lncm/neutrino-switcher:latest"
+                depends_on: [ lnd, bitcoin ]
+                logging: *default-logging
+                restart: always
+                volumes:
+                    - "${PWD}/lnd:/lnd"
+                    - "${PWD}/secrets:/secrets"
+                    - "${PWD}/statuses:/statuses"
+                networks:
+                    net:
+                        ipv4_address: 10.11.3.2
         dashboard:
                 container_name: dashboard
                 image: getumbrel/dashboard:v0.2.1
